@@ -1,0 +1,13 @@
+<% layout('boilerplate') %>
+<header>
+  <h1>Todos App with HTMX</h1>
+</header>
+<section>
+  <div id="form">
+    <%- include('new-form') %>
+  </div>
+  <!-- list todos -->
+  <ul id="todos-list">
+    <%- include('todos-list', { todos }) %>
+  </ul>
+</section>
