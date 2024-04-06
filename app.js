@@ -28,6 +28,10 @@ let todos = [
 ];
 let todosLength = todos.length;
 
+function isTodoOr404(todo, res) {
+  if (!todo) return res.render('404');
+}
+
 // GET home page
 app.get('/', (req, res) => {
   todos = todos.sort((a, b) => b.id - a.id);
@@ -67,15 +71,15 @@ app.get('/todos/:id', (req, res) => {
 // GET a todo by id for editing
 app.get('/todos/edit/:id', (req, res) => {
   const todo = todos.find(todo => todo.id === parseInt(req.params.id));
-  if (!todo) return res.status(404).render('404');
-  res.render('todos/edit-form', { todo, title: 'Edit Todo' });
+  isTodoOr404(todo, res);
+  res.render('todos/edit-form', { todo });
 });
 
 // PUT update a todo by id  
 app.put('/todos/:id', (req, res) => {
   const todoId = parseInt(req.params.id);
   const todoIndex = todos.findIndex(todo => todo.id === todoId);
-  if (todoIndex === -1) return res.status(404).render('404');
+  isTodoOr404(todos[todoIndex], res);
 
   const updatedTodo = {
     id: todoId,
@@ -83,14 +87,14 @@ app.put('/todos/:id', (req, res) => {
   };
 
   todos[todoIndex] = updatedTodo;
-  res.render('todos/show', { todo: updatedTodo, includeNewForm: true });
+  res.render('todos/show', { todo: updatedTodo });
 });
 
 
 // DELETE a todo by id
 app.delete('/todos/:id', (req, res) => {
   const todoIndex = todos.findIndex(t => t.id === parseInt(req.params.id));
-  if (todoIndex === -1) return res.status(404).render('404');
+  isTodoOr404(todos[todoIndex], res);
 
   todos.splice(todoIndex, 1);
   todos = todos.sort((a, b) => b.id - a.id);

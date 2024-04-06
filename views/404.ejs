@@ -1,3 +1,4 @@
-<% layout('boilerplate') %>
-<h1>Uh oh, the resource you're looking for is nowhere to be found.</h1>
-<a href="/"><< Return home</a>
+<main class="container" id="container" hx-swap-oob="true">
+  <h1>Uh oh, the resource you're looking for is nowhere to be found.</h1>
+  <a href="/" hx-get="/" hx-target="#container" hx-swap="outerHTML">Return home</a>
+</main>
