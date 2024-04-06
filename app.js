@@ -35,7 +35,7 @@ function isTodoOr404(todo, res) {
 // GET home page
 app.get('/', (req, res) => {
   todos = todos.sort((a, b) => b.id - a.id);
-  res.render('todos/index', { todos, title: 'Todos Index' });
+  res.render('todos/index', { todos });
 });
 
 // GET all todos
@@ -47,7 +47,7 @@ app.get('/todos', (req, res) => {
 
 // GET new todo form
 app.get('/todos/new', (req, res) => {
-  res.render('todos/new-form', { title: 'New Todo' });
+  res.render('todos/new-form');
 });
 
 // POST a new todo
