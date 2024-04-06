@@ -58,14 +58,7 @@ app.post('/todos', (req, res) => {
     text: req.body.text
   };
   todos = [...todos, newTodo];
-  res.render('todos/show', { todo: newTodo, includeNewForm: false });
-});
-
-// GET a todo by id
-app.get('/todos/:id', (req, res) => {
-  const todo = todos.find(todo => todo.id === parseInt(req.params.id));
-  if (!todo) return res.status(404).render('404');
-  res.render('todos/show', { todo, includeNewForm: true });
+  res.render('todos/show', { todo: newTodo });
 });
 
 // GET a todo by id for editing
