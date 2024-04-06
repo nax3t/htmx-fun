@@ -1,5 +1,5 @@
-<form hx-post="/todos" hx-target="#todos-list" hx-swap="afterbegin" id="new-form">
+<form hx-post="/todos" hx-target="#todos-list" hx-swap="afterbegin" hx-swap-oob="true" id="form" >
   <label for="new-todo">New Todo:</label>
-  <input type="text" id="new-todo" name="text" />
+  <input type="text" id="new-todo" name="text" required />
   <button type="submit">Add Todo</button>
 </form>

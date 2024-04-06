@@ -1,15 +1,11 @@
 <button class="outline secondary" hx-get="/todos/new" hx-target="#form" id="close-edit-form">
   <span class="material-symbols-outlined">close</span>
 </button>
-<form hx-put="/todos/<%= todo.id %>" hx-target="#todo-<%= todo.id %>" hx-swap="outerHTML" id="edit-form">
+<form hx-put="/todos/<%= todo.id %>"
+      hx-target="#todo-<%= todo.id %>"
+      hx-swap="outerHTML"
+      id="edit-form">
   <label for="newTodo">Edit Todo:</label>
-  <input type="text" id="newTodo" name="text" value="<%= todo.text %>" />
+  <input type="text" id="newTodo" name="text" value="<%= todo.text %>" required />
   <button type="submit">Update Todo</button>
 </form>
-<script>
-  // listen for edit-form submit, then click close-edit-form button to swap edit form with new form
-  document.querySelector('#edit-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.querySelector('#close-edit-form').click();
-  });
-</script>

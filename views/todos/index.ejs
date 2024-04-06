@@ -7,7 +7,5 @@
     <%- include('new-form') %>
   </div>
   <!-- list todos -->
-  <ul id="todos-list">
-    <%- include('todos-list', { todos }) %>
-  </ul>
+  <ul id="todos-list" hx-get="/todos" hx-trigger="load"></ul>
 </section>

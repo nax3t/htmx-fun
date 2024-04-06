@@ -1,3 +1,4 @@
+<%- include('new-form') %>
 <li id="todo-<%= todo.id %>">
   <%= todo.text %>
   <span class="material-symbols-outlined" hx-get="/todos/edit/<%= todo.id %>" hx-target="#form">edit</span>

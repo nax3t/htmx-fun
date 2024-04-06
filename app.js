@@ -26,17 +26,19 @@ let todos = [
     text: 'Walk the dog'
   }
 ];
+let todosLength = todos.length;
 
 // GET home page
 app.get('/', (req, res) => {
-  res.redirect('/todos');
+  todos = todos.sort((a, b) => b.id - a.id);
+  res.render('todos/index', { todos, title: 'Todos Index' });
 });
 
 // GET all todos
 app.get('/todos', (req, res) => {
   // sort todos DESC order
   todos = todos.sort((a, b) => b.id - a.id);
-  res.render('todos/index', { todos, title: 'Todos Index' });
+  res.render('todos/todos-list', { todos });
 });
 
 // GET new todo form
@@ -46,19 +48,20 @@ app.get('/todos/new', (req, res) => {
 
 // POST a new todo
 app.post('/todos', (req, res) => {
+  todosLength += 1;
   const newTodo = {
-    id: todos.length + 1,
+    id: todosLength,
     text: req.body.text
   };
   todos = [...todos, newTodo];
-  res.redirect(`/todos/${newTodo.id}`);
+  res.render('todos/show', { todo: newTodo, includeNewForm: false });
 });
 
 // GET a todo by id
 app.get('/todos/:id', (req, res) => {
   const todo = todos.find(todo => todo.id === parseInt(req.params.id));
   if (!todo) return res.status(404).render('404');
-  res.render('todos/show', { todo, title: 'Show Todo' });
+  res.render('todos/show', { todo, includeNewForm: true });
 });
 
 // GET a todo by id for editing
@@ -80,7 +83,7 @@ app.put('/todos/:id', (req, res) => {
   };
 
   todos[todoIndex] = updatedTodo;
-  res.render('todos/show', { todo: updatedTodo });
+  res.render('todos/show', { todo: updatedTodo, includeNewForm: true });
 });
 
 
